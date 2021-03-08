@@ -1,35 +1,29 @@
-<h3>Username: {{ userid }}</h3>
+<h3>Username: {{ socketService?.socket?.id }}</h3>
 
 <div class="row">
   <div class="col-xs-12">
-    <video #remoteVideo class="remoteVideo"></video>
+    <video #remoteVideo class="remoteVideo" autoplay controls></video>
   </div>
   <div class="col-xs-12">
-    <video #localVideo class="localVideo"></video>
+    <video #localVideo autoplay controls class="localVideo"></video>
   </div>
 </div>
-
 <div class="row">
-  <div class="col-xs-12">
-    <button *ngIf="!playing" (click)="call()" class="btn btn-primary">
-      Call
-    </button>
-    <button *ngIf="playing" (click)="stop()" class="btn btn-primary">
-      Stop
-    </button>
-  </div>
+  <ul>
+    <label>User socket</label>
+    <li *ngFor="let user of users">
+      {{ user }}{{ socketService.socket.id == user ? "(me)" : "" }}
+      <button
+        *ngIf="!playing && socketService.socket.id != user"
+        (click)="call(user)"
+        class="btn btn-primary"
+      >
+        Call
+      </button>
+    </li>
+  </ul>
 </div>
 
-<div *ngFor="let message1 of messages1">
-  {{ message1.text }}
-</div>
-<br />
-<hr />
-<input
-  type="text"
-  placeholder="Enter message"
-  [(ngModel)]="message1"
-  name="message1"
-  (keyup.enter)="sendPrivatMessages()"
-/>
-<br />
+<button *ngIf="incomingCall" (click)="acceptCall()" class="btn btn-primary">
+  Accept
+</button>

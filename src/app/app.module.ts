@@ -119,6 +119,7 @@ import { SocketService } from "./services/socket.service";
 
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
