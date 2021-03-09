@@ -70,9 +70,10 @@ export class VcComponent implements OnInit {
     n.getUserMedia(
       mediaConfig,
       (stream: MediaStream) => {
-        this.myStream = new MediaStream();
-        this.myStream.addTrack(stream.getVideoTracks()[0]);
-        this.localVideoRef.nativeElement.srcObject = this.myStream;
+        this.myStream = stream;
+        const myStream = new MediaStream();
+        myStream.addTrack(stream.getVideoTracks()[0]);
+        this.localVideoRef.nativeElement.srcObject = myStream;
       },
       (err) => {
         this.isStreamAvailable = false;
