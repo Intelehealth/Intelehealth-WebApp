@@ -70,7 +70,8 @@ export class VcComponent implements OnInit {
     n.getUserMedia(
       mediaConfig,
       (stream: MediaStream) => {
-        this.myStream = stream;
+        this.myStream = new MediaStream();
+        this.myStream.addTrack(stream.getVideoTracks()[0]);
         this.localVideoRef.nativeElement.srcObject = this.myStream;
       },
       (err) => {
@@ -86,18 +87,22 @@ export class VcComponent implements OnInit {
       trickle: false,
       config: {
         iceServers: [
-          // {
-          //   urls: "stun:numb.viagenie.ca",
-          //   username: "sultan1640@gmail.com",
-          //   credential: "98376683",
-          // },
-          // {
-          //   urls: "turn:numb.viagenie.ca",
-          //   username: "sultan1640@gmail.com",
-          //   credential: "98376683",
-          // },
+          {
+            urls: "stun:numb.viagenie.ca",
+            username: "sultan1640@gmail.com",
+            credential: "98376683",
+          },
+          {
+            urls: "turn:numb.viagenie.ca",
+            username: "sultan1640@gmail.com",
+            credential: "98376683",
+          },
+          {
+            url: "turn:192.158.29.39:3478?transport=udp",
+            credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA=",
+            username: "28224511:1379330808",
+          },
           { urls: "stun:stun.l.google.com:19302" },
-          { urls: "stun:stun1.l.google.com:19302" },
         ],
       },
       stream: this.myStream,

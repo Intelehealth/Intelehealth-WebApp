@@ -194,13 +194,12 @@ import { SocketService } from "./services/socket.service";
               component: VisitSummaryComponent,
               canActivate: [AuthGuard],
             },
-            {
-              path: "vc/emVlc2hhbg/call",
-              component: VcComponent,
-              canActivate: [AuthGuard],
-            },
             { path: "", redirectTo: "home", pathMatch: "full" },
           ],
+        },
+        {
+          path: "vc/emVlc2hhbg/call",
+          component: VcComponent,
         },
         { path: "**", component: Page404Component },
       ],
